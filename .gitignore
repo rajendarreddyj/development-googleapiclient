@@ -1,0 +1,50 @@
+# Eclipse
+.classpath
+.project
+.settings/
+.gradle/
+bin/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring
+.springBeans
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# Netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.nb-gradle/
+
+# git
+.git/
+
+# Android
+/build
+google-services.json
+
+# versions plugin
+pom.xml.versionsBackup
+
+client_secrets.json
+!gradle-wrapper.jar

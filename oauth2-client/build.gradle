@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+//apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'com.bmuschko.tomcat'
+
+group 'com.rajendarreddyj'
+version '1.0-SNAPSHOT'
+
+
+dependencies {
+    compile("com.google.api-client:google-api-client:${googleApiClientVersion}")
+    compile("com.google.http-client:google-http-client:${googleApiClientVersion}")
+    compile("com.google.http-client:google-http-client-jackson:${googleApiClientVersion}")
+    providedCompile("javax:javaee-api:${javaEEVersion}")
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatJuliLogVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+/*
+gretty {
+    httpPort = 8080
+}*/
+tomcat {
+    httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+}
+

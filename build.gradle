@@ -1,0 +1,91 @@
+// define the group of the GAV
+group = 'com.rajendarreddyj'
+
+// define the version of the GAV
+version '1.0-SNAPSHOT'
+
+description = "Root project of the google api example projects that uses Gradle."
+
+
+allprojects {
+
+    //Instructions for all projects
+    ext {
+        grettyPluginVersion ='2.0.0'
+        tomcatPluginVersion='2.5'
+        tomcatVersion='9.0.10'
+        tomcatJuliLogVersion='9.0.0.M6'
+        // compile/runtime dependency versions
+        googleApiClientVersion='1.23.0'
+        lombokVersion='1.18.0'
+        javaEEVersion='7.0'
+        junitVersion='5.2.0'
+    }
+}
+
+subprojects {
+    //Instructions for each sub project
+    // Apply the java plugin to add support for Java
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    group = rootProject.group
+    version = rootProject.version
+
+    // In this section you declare where to find the dependencies of your project
+    repositories {
+        // Use jcenter for resolving your dependencies.
+        // You can declare any Maven/Ivy/file repository here.
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "http://repo.maven.apache.org/maven2"
+        }
+    }
+
+    buildscript {
+        repositories {
+            jcenter()
+            mavenLocal()
+            mavenCentral()
+            maven {
+                url "http://repo.maven.apache.org/maven2"
+            }
+        }
+        dependencies {
+            //classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+            classpath("org.akhikhl.gretty:gretty:${grettyPluginVersion}")
+            classpath("com.bmuschko:gradle-tomcat-plugin:${tomcatPluginVersion}")
+        }
+    }
+
+    dependencies {
+        // The production code uses kotlin
+        //compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
+        //testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+        //testCompile("io.projectreactor:reactor-test:${reactorVersion}")
+        compile("com.google.api-client:google-api-client:${googleApiClientVersion}")
+        // Use JUnit test framework
+        testCompileOnly (
+                "junit:junit:4.12"
+        )
+        testImplementation(
+                "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+        )
+        testRuntimeOnly(
+                "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+                "org.junit.vintage:junit-vintage-engine:${junitVersion}"
+        )
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+}
+
+// Running 'gradle wrapper' will generate gradlew - Getting gradle wrapper working and using it will save you a lot of pain.
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.8.1'
+}
